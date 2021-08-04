@@ -1,7 +1,8 @@
-.header__container {
+.layout__conatiner {
     min-height: 100vh;
     
 }
 .childern__content {
-    min-height: 90vh;
+    height: 90vh;
+    min-height: auto;
 }

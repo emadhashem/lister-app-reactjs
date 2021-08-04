@@ -1,0 +1,23 @@
+.btn__conatiner {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 30%;
+    border-radius: 15px;
+}
+.btn__ {
+    background-color: transparent;
+    border: 0;
+    outline: none;
+    width: 100%;
+    height: 100%;
+    padding: 15px;
+    border-radius: 15px;
+    cursor: pointer;
+}
+.btn__:hover {
+    background-color: rgb(204, 195, 204);
+}
+.btn__conatiner:active {
+    transform: translateY(2px);
+}
