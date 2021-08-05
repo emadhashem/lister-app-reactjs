@@ -4,12 +4,23 @@ import './logincompstyles.css'
 import PermIdentityIcon from '@material-ui/icons/PermIdentity';
 import CommonBtn from '../../commonBtn/CommonBtn';
 import LockIcon from '@material-ui/icons/Lock';
+import { login_user } from '../../../server/auth';
 function LoginComp() {
     const [email, setemail] = useState("")
     const [pass, setpass] = useState("")
     async function handleSubmit(e) {
         e.preventDefault()
-        alert(email)
+        await login()
+
+    }
+    async function login() {
+        try {
+            const res = await login_user(email, pass)
+            console.log(res)
+            return res
+        } catch (error) {
+            console.log(error.message)
+        }
     }
     return (
         <div className="login__container background__class" >
@@ -22,7 +33,7 @@ function LoginComp() {
                     onTextChange={(ev) => setpass(ev.target.value)}
                     Icon={() => <LockIcon />}
                 />
-                <CommonBtn backGroundclassName="background__class"
+                <CommonBtn onclick={handleSubmit} backGroundclassName="background__class"
                     btnName="Login" />
             </form>
         </div>

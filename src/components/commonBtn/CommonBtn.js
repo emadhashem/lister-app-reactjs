@@ -1,9 +1,9 @@
 import React from 'react'
 import './btnstyles.css'
-function CommonBtn({backGroundclassName, Icon = () => null, btnName}) {
+function CommonBtn({backGroundclassName, Icon = () => null, btnName, onclick = f => f}) {
     return (
         <div className = {`btn__conatiner ${backGroundclassName}` } >
-            <input type = "button" value = {btnName} className = "btn__" />
+            <input onClick = {onclick} type = "button" value = {btnName} className = "btn__" />
             {Icon()}
         </div>
     )

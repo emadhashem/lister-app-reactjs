@@ -7,6 +7,7 @@ import LoginScreen from './screens/auth/login/LoginScreen';
 import SignUpScreen from './screens/auth/signup/SignUpScreen';
 import "./app.css"
 import Layout from './components/app/layout/Layout';
+import PublicRoute from './components/restrictions/PublicRoute';
 function App() {
   const dispatch = useDispatch()
   useEffect(() => {
@@ -16,8 +17,8 @@ function App() {
     <Router>
       <Layout>
         <Switch>
-          <Route path='/auth/login' component={LoginScreen} />
-          <Route path='/auth/signup' component={SignUpScreen} />
+          <PublicRoute path='/auth/login' component={LoginScreen} />
+          <PublicRoute path='/auth/signup' component={SignUpScreen} />
 
 
           <Redirect to='/auth/login' />
