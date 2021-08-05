@@ -6,23 +6,25 @@ import PersonPinIcon from '@material-ui/icons/PersonPin';
 import LockIcon from '@material-ui/icons/Lock';
 import MailIcon from '@material-ui/icons/Mail';
 import { create_user } from '../../../server/auth';
-function SignUpComp() {
+function SignUpComp({ getTheUserId }) {
     const [email, setemail] = useState("")
     const [fName, setfName] = useState("")
     const [lName, setlName] = useState("")
-
     const [pass, setpass] = useState("")
     async function handleSubmit(e) {
         e.preventDefault()
-        await signUp()
+        const uid = await signUp()
+        getTheUserId(uid)
+
     }
     async function signUp() {
         try {
             const res = await create_user(email, pass)
-            console.log(res)
             return res
         } catch (error) {
-            console.error(error.message);
+            alert(error.message)
+            return null
+
         }
     }
     return (
@@ -48,7 +50,7 @@ function SignUpComp() {
                     Icon={() => <LockIcon fontSize="default" />}
 
                 />
-                <CommonBtn onclick={signUp} btnName="SignUp" backGroundclassName="background__class" />
+                <CommonBtn onclick={handleSubmit} btnName="SignUp" backGroundclassName="background__class" />
             </form>
         </div>
     )

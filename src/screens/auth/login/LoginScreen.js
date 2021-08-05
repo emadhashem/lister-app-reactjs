@@ -1,9 +1,9 @@
 import React from 'react'
 import LoginComp from '../../../components/auth/login/LoginComp'
 import './loginstyles.css'
-function LoginScreen() {
+function LoginScreen({getTheUserId}) {
     return (
-        <LoginComp />
+        <LoginComp getTheUserId = {getTheUserId} />
     )
 }
 

@@ -1,5 +1,25 @@
-.header__container{
+.header__container {
     height: 10vh;
     width: 100%;
-    background-color: rgb(11, 104, 73);
+    position: relative;
+    z-index: 10;
+    box-shadow: 0 6px 20px 0 rgba(0, 0, 0, 0.466);
+    display: flex;
+    justify-content: space-evenly;
+}
+.header__container > p {
+    color: white;
+    font-size: 25px;
+    text-align: center;
+    margin-top: 15px;
+}
+
+.background__color {
+    background: #fe8c00; /* fallback for old browsers */
+    background: -webkit-linear-gradient(to right, #f83600, #fe8c00); /* Chrome 10-25, Safari 5.1-6 */
+    background: linear-gradient(
+        to right,
+        #f83600,
+        #fe8c00
+    ); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
 }

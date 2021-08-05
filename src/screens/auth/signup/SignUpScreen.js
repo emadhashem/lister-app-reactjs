@@ -1,9 +1,9 @@
 import React from 'react'
 import SignUpComp from '../../../components/auth/signup/SignUpComp'
 import './signupstyles.css'
-function SignUpScreen() {
+function SignUpScreen({getTheUserId}) {
     return (
-        <SignUpComp />
+        <SignUpComp  getTheUserId = {getTheUserId} />
     )
 }
 

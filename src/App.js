@@ -9,10 +9,7 @@ import "./app.css"
 import Layout from './components/app/layout/Layout';
 import PublicRoute from './components/restrictions/PublicRoute';
 function App() {
-  const dispatch = useDispatch()
-  useEffect(() => {
-    dispatch(action_set_user_id(1))
-  }, [])
+ 
   return (
     <Router>
       <Layout>

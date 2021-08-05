@@ -5,21 +5,23 @@ import PermIdentityIcon from '@material-ui/icons/PermIdentity';
 import CommonBtn from '../../commonBtn/CommonBtn';
 import LockIcon from '@material-ui/icons/Lock';
 import { login_user } from '../../../server/auth';
-function LoginComp() {
+function LoginComp({getTheUserId}) {
     const [email, setemail] = useState("")
     const [pass, setpass] = useState("")
+
     async function handleSubmit(e) {
         e.preventDefault()
-        await login()
+        const uid = await login()
+        getTheUserId(uid)
 
     }
     async function login() {
         try {
             const res = await login_user(email, pass)
-            console.log(res)
             return res
         } catch (error) {
-            console.log(error.message)
+            alert(error.message)
+            return null
         }
     }
     return (
