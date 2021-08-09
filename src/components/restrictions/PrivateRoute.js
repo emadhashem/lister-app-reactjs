@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react'
 import { connect, useDispatch } from 'react-redux'
-import { Route, withRouter } from 'react-router-dom'
+import { Route, withRouter, Redirect } from 'react-router-dom'
 import { action_set_cur_path } from '../../redux/actions/commonActions'
 
 function PrivateRoute({ user, component: Component, ...rest }) {

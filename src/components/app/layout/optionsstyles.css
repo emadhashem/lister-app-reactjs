@@ -1,0 +1,17 @@
+.options__conatiner{
+    width: 40%;
+    display: flex;
+    align-items: center;
+    justify-content: space-evenly;
+    color: white;
+}
+.icon__conatiner {
+    cursor: pointer;
+}
+.icon__conatiner:hover {
+    color: rgba(0, 0,0, .3);
+    transition: .4s ;
+}
+.icon__conatiner:active {
+    transform: translateY(5px);
+}

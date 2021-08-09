@@ -7,7 +7,7 @@
 }
 .form__ {
     width: 30%;
-    height: 70%;
+    height: 80%;
     background-color: white;
     border-radius: 20px;
     padding: 15px;
@@ -25,4 +25,13 @@
         #f83600,
         #fe8c00
     ); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+}
+
+.btns__holder {
+    width: 100%;
+    display: flex;
+    justify-content: space-evenly;
+    flex-direction: column;
+    align-items: center;
+    height: 20%;
 }
