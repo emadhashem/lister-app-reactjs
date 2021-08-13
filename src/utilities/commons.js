@@ -1,0 +1,1 @@
+export const imgSrcObito = 'https://c4.wallpaperflare.com/wallpaper/84/884/953/anime-naruto-obito-uchiha-rinnegan-naruto-wallpaper-preview.jpg'

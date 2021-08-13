@@ -10,6 +10,8 @@ import Layout from './components/app/layout/Layout';
 import PublicRoute from './components/restrictions/PublicRoute';
 import PrivateRoute from './components/restrictions/PrivateRoute';
 import HomeScreen from './screens/app/HomeScreen'
+import ProfileScreen from './screens/app/ProfileScreen';
+import ChatScreen from './screens/app/ChatScreen';
 function App() {
  
   return (
@@ -19,7 +21,10 @@ function App() {
           <PublicRoute path='/auth/login' component={LoginScreen} />
           <PublicRoute path='/auth/signup' component={SignUpScreen} />
 
-          <PrivateRoute path = "/member/home" component = {HomeScreen} />
+          <PrivateRoute exact path = "/member/home" component = {HomeScreen} />
+          <PrivateRoute path = "/member/profile/:idprofile" component = {ProfileScreen} />
+          <PrivateRoute path = "/member/chat" component = {ChatScreen} />
+
           <Redirect to='/auth/login' />
         </Switch>
       </Layout>

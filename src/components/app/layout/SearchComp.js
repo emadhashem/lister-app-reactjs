@@ -4,6 +4,7 @@ import List from '@material-ui/core/List';
 import ListItem from '@material-ui/core/ListItem';
 import SearchIcon from '@material-ui/icons/Search';
 import {uid} from 'uid'
+import CommonHeaderPost from '../../commonheaderpost/CommonHeaderPost';
 
 const searchResults = ["omda", "emad", "test", "test2", "ali", "abdo"]
 
@@ -11,10 +12,10 @@ function SearchComp() {
     const [searchText, setsearchText] = useState('')
     return (
         <div className="search__root" >
-            {(searchResults.length > 0) && <div className = "search__results__container" >
+            {(searchResults.length < 0) && <div className = "search__results__container" >
                 {
                     searchResults.map(item => (
-                        <div key = {uid()} > {item} </div>
+                        <CommonHeaderPost name = {item}  />
                     ))
                 }
             </div>}
