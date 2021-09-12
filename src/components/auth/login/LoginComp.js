@@ -18,6 +18,10 @@ function LoginComp({ getTheUserId }) {
         setloading(true)
         e.preventDefault()
         const uid = await login()
+        if (!uid) {
+            setloading(false);
+            return
+        }
         const userData = await get_the_user_data(uid)
         getTheUserId(uid)
         go.push("/member/home")
@@ -37,7 +41,7 @@ function LoginComp({ getTheUserId }) {
         <div className="login__container background__class" >
             {
                 (loading) ? (
-                    <CircularProgress   />
+                    <CircularProgress />
 
                 ) : (
                     <form className="form__" onSubmit={handleSubmit} >

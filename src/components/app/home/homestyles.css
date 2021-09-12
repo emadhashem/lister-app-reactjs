@@ -1,0 +1,17 @@
+.home__container {
+    /* background-color: blue; */
+    height: auto;
+    width: 98%;
+    margin: auto;
+    display: flex;
+    /* justify-content: ; */
+    align-items: center;
+    flex-direction: row;
+}
+.importantliks__{
+    width: 25%;
+}
+.postscontainer__{
+    min-height: 90vh;
+    width: 50%;
+}
