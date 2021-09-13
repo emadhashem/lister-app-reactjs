@@ -1,8 +1,7 @@
 .postcomp__container {
-    width: 100%;
-    
+    width: 500px;
+    height: 300px;
     margin-top: 15px;
-    
     .post__header {
         width: 100%;
         margin: auto;
@@ -16,8 +15,6 @@
             width: 100%;
             height: 70%;
             display: flex;
-            
-            // justify-content: space-evenly;
             .name__time {
                 margin-left: 15px;
             }
@@ -27,9 +24,22 @@
         height: 65%;
         background-color: white;
         border-radius: 50px;
-        // background: #e0e0e0;
-        box-shadow:  29px 29px 84px #cecece,
-             -29px -29px 84px #f2f2f2;
+        width: 100%;
+        box-shadow:  29px 29px 84px #cecece,-29px -29px 84px #f2f2f2;
         padding: 15px;
+        .todos__container {
+            display: flex;
+            width: 100%;
+            height: 100%;
+            align-items: center;
+            .todo__container {
+                width: 200px;
+                height: 70%;
+                background-color: red;
+                border-radius: 10px;
+                margin-right: 10px;
+            }
+        }
     }
+
 }
