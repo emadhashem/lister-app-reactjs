@@ -1,0 +1,15 @@
+.postfooter__container{
+    width: 80%;
+    height: 15%;
+    display: flex;
+    justify-content: space-around;
+    margin: auto;
+    align-items: center;
+    span {
+        cursor: pointer;
+        &:active {
+            transform: translateY(1px);
+            
+        }
+    }
+}

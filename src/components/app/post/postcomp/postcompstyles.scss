@@ -1,0 +1,43 @@
+.post__container{
+    width: 98%;
+    background-color: transparent;
+    height: 220px;
+    margin: auto;
+    margin-bottom: 30px;
+    border-bottom-left-radius: 30px;
+    border-bottom-right-radius: 30px;
+    background: #e0e0e0;
+    box-shadow:  20px 30px 60px #a7a6a6,-20px -20px 60px #ffffff;
+    display: flex;
+    flex-direction: column;
+    .post__header {
+        width: 92%;
+        height: 17%;                
+        background: #FEAC5E;  /* fallback for old browsers */
+        background: -webkit-linear-gradient(to right, #4BC0C8, #C779D0, #FEAC5E);  /* Chrome 10-25, Safari 5.1-6 */
+        background: linear-gradient(to right, #4BC0C8, #C779D0, #FEAC5E); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+        padding-left: 3%;
+        padding-right: 5%;
+        padding-top: 1%;
+        padding-bottom: 1%;
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+        align-items: center;
+        .username__time__container{
+            width: 90%;
+            p {
+                color: white;
+            }
+            p.usrname__ {
+                font-size: large;
+                text-transform: capitalize;
+                // font-weight: bold;
+            }
+            p.time__ {
+                font-size: small;
+            }
+        }
+    }
+    
+}

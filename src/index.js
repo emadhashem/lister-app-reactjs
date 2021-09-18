@@ -6,7 +6,8 @@ import reportWebVitals from './reportWebVitals';
 import {PersistGate} from 'redux-persist/integration/react'
 import {store, persistor} from './redux/store'
 import { Provider } from 'react-redux';
-
+// import "~slick-carousel/slick/slick.css"; 
+// import "~slick-carousel/slick/slick-theme.css";
 ReactDOM.render(
   <Provider store = {store} >
     <React.StrictMode>
