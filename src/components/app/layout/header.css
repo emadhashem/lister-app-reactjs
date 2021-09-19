@@ -3,7 +3,9 @@
     width: 100%;
     position: relative;
     z-index: 10;
-    box-shadow: 0 6px 20px 0 rgba(0, 0, 0, 0.466);
+    -webkit-box-shadow: 0px 15px 30px 0px rgba(0, 0, 0, 0.5);
+    -moz-box-shadow: 0px 15px 30px 0px rgba(0, 0, 0, 0.5);
+    box-shadow: 0px 15px 30px 0px rgba(0, 0, 0, 0.5);
     display: flex;
     justify-content: space-evenly;
     align-items: center;
@@ -22,9 +24,5 @@
 .background__color {
     background: #fe8c00; /* fallback for old browsers */
     background: -webkit-linear-gradient(to right, #f83600, #fe8c00);
-    background: linear-gradient(
-        to right,   
-        #f83600,
-        #fe8c00
-    ); 
+    background: linear-gradient(to right, #f83600, #fe8c00);
 }
