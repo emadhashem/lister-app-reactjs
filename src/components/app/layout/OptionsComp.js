@@ -5,13 +5,14 @@ import BookIcon from '@material-ui/icons/Book';
 import OptionComp from './OptionComp';
 import DashboardIcon from '@material-ui/icons/Dashboard';
 import './optionsstyles.css'
+import { useHistory } from 'react-router';
 
-function OptionsComp({ onLogOut }) {
-
+function OptionsComp({ onLogOut, userId }) {
+    const go = useHistory()
 
     return (
         <div className="options__conatiner" >
-            <OptionComp onClick={() => { }}
+            <OptionComp onClick={() => { go.push('/member/profile/' + userId) }}
                 icon={() => <BookIcon fontSize="large" />} />
             <OptionComp onClick={() => { }}
                 icon={() => <ChatBubbleIcon fontSize="large" />} />

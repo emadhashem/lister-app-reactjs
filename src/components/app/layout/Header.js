@@ -6,7 +6,7 @@ import {action_set_user_id} from '../../../redux/actions/userActions'
 import OptionsComp from './OptionsComp'
 import { useHistory } from 'react-router-dom'
 import SearchComp from './SearchComp'
-function Header({ common }) {
+function Header({ common ,user }) {
     const [headerState, setheaderState] = useState(false)
     const go = useHistory()
     const dispatch = useDispatch()
@@ -28,9 +28,9 @@ function Header({ common }) {
         <div className="header__container background__color">
             {(headerState) && <SearchComp />}
             <p onClick = {handleGoToHome} >Lister App</p> 
-            {(headerState) && <OptionsComp onLogOut = {handleLogOut} />}
+            {(headerState) && <OptionsComp userId = {user.id} onLogOut = {handleLogOut} />}
         </div>
     )
 }
-const mapStateToProps = ({ common }) => ({ common })
+const mapStateToProps = ({ common, user }) => ({ common , user})
 export default connect(mapStateToProps)(Header)

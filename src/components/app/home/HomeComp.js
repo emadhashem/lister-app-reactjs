@@ -1,11 +1,12 @@
 import React from 'react'
 import PostComp from '../post/postcomp/PostComp'
-
+import LeftSidePanel from '../leftsidepanel/LeftSidePanel'
 import './homestyles.css'
 function HomeComp() {
     return (
         <div className="home__container" >
-            <div className="importantliks__"></div>
+            <LeftSidePanel />
+            
             <div className="postscontainer__" >
                <PostComp title = "this todo's title" />
                <PostComp title = "this todo's title" />
@@ -18,6 +19,7 @@ function HomeComp() {
                <PostComp />
                
             </div>
+            <div className = "rightside"></div>
         </div>
     )
 }

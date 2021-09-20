@@ -4,13 +4,14 @@
     width: 98%;
     margin: auto;
     display: flex;
-    /* justify-content: ; */
-    align-items: center;
+    justify-content: space-between ;
+    align-items: flex-start;
     flex-direction: row;
     margin-top: 15px;
+   
 }
-.importantliks__{
-    width: 25%;
+.rightside {
+    width: 20%;
 }
 .postscontainer__{
     min-height: 90vh;
