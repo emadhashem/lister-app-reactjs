@@ -1,4 +1,6 @@
 import {db} from './firebase'
+
+
 const postDef = {
     title : '',
     todos : [],
@@ -6,12 +8,18 @@ const postDef = {
     id : ''
 }
 
-export async function addPost(userId = '' , postId = '', todos = [], title = '') {
+export async function getAllPosts(userId) {
+    const res = await db.collection('posts').doc(userId).get()
+    return res.data().arr
+}
+
+export async function addPostApi(userId = '' , postId = '', todos = [], title = '') {
+    const userPosts = await getAllPosts(userId)
     const res = await db.collection('posts').doc(userId).update({
-        arr : arrayUnion({...postDef, title, id : postId, todos})
+        arr : [{...postDef, id : postId, title, todos}, ...userPosts]
     })
-    const res1 = await db.collection('comments').doc([postId]).set({arr : []})
-    return res
+    const res1 = await db.collection('comments').doc(postId).set({arr : []})
+    
 }
 
 

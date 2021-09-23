@@ -9,7 +9,11 @@ import AddTaskIcon from '@mui/icons-material/AddTask';
 import { IconButton } from '@mui/material';
 import { v4 } from 'uuid';
 import PostBodyComp from '../post/postbody/PostBodyComp';
-const tstTodos = [{ text: 1, id: 1 }, { text: 2, id: 2 }, { text: 3, id: 3 }, { text: 4, id: 4 }]
+import { addPostApi, getAllPosts } from '../../../server/posts'
+import CircularProgress from '@mui/material/CircularProgress';
+
+
+
 function ProfileComp({ idprofile, user }) {
     const [isMine, setisMine] = useState('')
     const [isfriend, setisfriend] = useState(false)
@@ -17,10 +21,20 @@ function ProfileComp({ idprofile, user }) {
     const [titleInput, settitleInput] = useState('')
     const [todoInpt, settodoInpt] = useState('')
     const [todosPost, settodosPost] = useState([])
+
+    const [postsArr, setpostsArr] = useState([])
+    const [loadingPosts, setloadingPosts] = useState(false)
     useEffect(() => {
         setisMine(idprofile == user.id)
     }, [idprofile])
+    useEffect(() => {
+        setloadingPosts(true);
+        (async () => {
+            setpostsArr(await getAllPosts(user.id))
+            setloadingPosts(false)
 
+        })()
+    }, [])
     function addTodo() {
         if (todoInpt.length <= 3) {
             alert('please add some text')
@@ -29,15 +43,22 @@ function ProfileComp({ idprofile, user }) {
         settodosPost((arr) => [{ id: v4(), textTodo: todoInpt }, ...arr])
         settodoInpt('')
     }
-    function addPost() {
+    async function addPost() {
         if (titleInput.length <= 3) {
             alert('please add title or description')
             return;
         }
+        try {
+            const postId = v4()
+            const res = await addPostApi(user.id, postId, todosPost, titleInput)
+            setpostsArr((arr) => [{ title: titleInput, todos: todosPost, id: postId }, ...arr])
+            settitleInput('')
+            settodosPost([])
+        } catch (error) {
+            alert(error.message)
+        }
 
 
-        settitleInput('')
-        settodosPost([])
     }
     return (
         <div className="profilecontainer__" >
@@ -75,7 +96,7 @@ function ProfileComp({ idprofile, user }) {
                     (isMine) && (
                         <div className="addpost__container">
                             <form>
-                                <input type="button" value="ADD POST" />
+                                <input type="button" value="ADD POST" onClick={addPost} />
                                 <input className="title__input" type="text"
                                     placeholder="ADD TITLE OR DESCRIPTION"
 
@@ -105,15 +126,17 @@ function ProfileComp({ idprofile, user }) {
                     )
                 }
                 <div className="posts__container">
-                    <PostBodyComp title="this profile posts"
-                        todos={tstTodos}
-                    />
-                    <PostBodyComp title="this profile posts"
-                        todos={tstTodos}
-                    />
-                    <PostBodyComp title="this profile posts"
-                        todos={tstTodos}
-                    />
+                    {
+                        postsArr.map(item => (
+                            <PostBodyComp key={item.id}
+                                todos={item.todos}
+                                title={item.title} />
+                        ))
+
+                    }
+                    {(loadingPosts == true) && <div className = "loading__container" >
+                        <CircularProgress color="success" />
+                    </div>}
                 </div>
             </div>
         </div>
