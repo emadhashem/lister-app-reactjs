@@ -12,8 +12,11 @@ import PostBodyComp from '../post/postbody/PostBodyComp';
 import { addPostApi, getAllPosts } from '../../../server/posts'
 import CircularProgress from '@mui/material/CircularProgress';
 import DeleteIcon from '@mui/icons-material/Delete';
-import {storage} from '../../../server/firebase'
+import { storage } from '../../../server/firebase'
+import { deleteSomePhoto, downloadImg, noProfileFireBasePath, uploadImg } from '../../../server/storageFirebase';
 
+
+const noProfilePath = 'noprofile.webp'
 
 function ProfileComp({ idprofile, user }) {
     const [isMine, setisMine] = useState('')
@@ -25,22 +28,21 @@ function ProfileComp({ idprofile, user }) {
 
     const [postsArr, setpostsArr] = useState([])
     const [loadingPosts, setloadingPosts] = useState(false)
-    const [userImg, setuserImg] = useState(null)
-    useEffect(() => {
-        console.log(userImg)
-    }, [userImg])
+
+    const [userImg, setuserImg] = useState(noProfileFireBasePath)
 
     useEffect(() => {
         setisMine(idprofile == user.id)
     }, [idprofile])
+
     useEffect(() => {
         setloadingPosts(true);
         (async () => {
-            setpostsArr(await getAllPosts(user.id))
+            setpostsArr(await getAllPosts(idprofile))
             setloadingPosts(false)
-
+            await getProfileImg()
         })()
-    }, [])
+    }, [idprofile])
     function addTodo() {
         if (todoInpt.length <= 3) {
             alert('please add some text')
@@ -67,6 +69,7 @@ function ProfileComp({ idprofile, user }) {
 
     }
     function choosefile() {
+        if(isMine == false) return
         inputRef.current.click();
     }
     const inputRef = useRef(null)
@@ -80,29 +83,33 @@ function ProfileComp({ idprofile, user }) {
             // console.log(errImg);
         }
     }
-    async function readBlob(blob) {
-        const objectURL = URL.createObjectURL(blob);
-        return objectURL;
+    async function handleRemove() {
+        setuserImg(null)
+        inputRef.current.value = null;
+        const resUrl = await downloadImg(noProfilePath)
+        setuserImg(resUrl)
+        await deleteSomePhoto(`imgs/${idprofile}`)
     }
+    async function getProfileImg() {
+        try {
+            const resUrl = await downloadImg(`imgs/${idprofile}`)
+            setuserImg(resUrl)
 
+        } catch (error) {
+            const resUrlNoProfile = await downloadImg(noProfilePath)
+            setuserImg(resUrlNoProfile)
+        }
+
+    }
     async function uplaodUserImg(file) {
-        
-        const uploadTask = storage.ref(`imgs/${user.id}`).put(file)
-        uploadTask.on('state_changed',
-            (snapshot) => { },
-            (error) => { console.log(error) },
-            async () => {
-                // Upload completed successfully, now we can get the download URL
-                console.log(await downloadImg())
-            }
-
-        )
-    }
-    async function downloadImg() {
-        const url = await Storage.ref('imgs')
-            .child(user.id)
-            .getDownloadURL()
-        return url
+        try {
+            const res = await uploadImg(file, `imgs/${idprofile}`)
+            const resUrl = await downloadImg(`imgs/${idprofile}`)
+            setuserImg(resUrl)
+            inputRef.current.value = null;
+        } catch (error) {
+            alert(error)
+        }
     }
     return (
         <div className="profilecontainer__" >
@@ -114,8 +121,8 @@ function ProfileComp({ idprofile, user }) {
                             alt="img-profile"
                             src={userImg}
                             sx={{ width: 150, height: 150, cursor: 'pointer' }} />
-                        {(userImg) && <span>
-                            <IconButton>
+                        {(userImg != noProfileFireBasePath && isMine == true) && <span>
+                            <IconButton onClick = {handleRemove} >
                                 <DeleteIcon color="error" fontSize="large" />
                             </IconButton>
                         </span>}

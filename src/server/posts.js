@@ -9,8 +9,13 @@ const postDef = {
 }
 
 export async function getAllPosts(userId) {
-    const res = await db.collection('posts').doc(userId).get()
-    return res.data().arr
+    try {
+        const res = await db.collection('posts').doc(userId).get()
+        return res.data().arr
+    } catch (error) {
+        return []
+    }
+    
 }
 
 export async function addPostApi(userId = '' , postId = '', todos = [], title = '') {
