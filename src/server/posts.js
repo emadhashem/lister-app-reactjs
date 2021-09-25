@@ -1,11 +1,12 @@
-import {db} from './firebase'
+import { db } from './firebase'
+import firebase from 'firebase/app'
 
 
 const postDef = {
-    title : '',
-    todos : [],
-    likes : 0,
-    id : ''
+    title: '',
+    todos: [],
+    likes: 0,
+    id: ''
 }
 
 export async function getAllPosts(userId) {
@@ -15,16 +16,15 @@ export async function getAllPosts(userId) {
     } catch (error) {
         return []
     }
-    
+
 }
 
-export async function addPostApi(userId = '' , postId = '', todos = [], title = '') {
-    const userPosts = await getAllPosts(userId)
+export async function addPostApi(userId = '', postId = '', todos = [], title = '') {
     const res = await db.collection('posts').doc(userId).update({
-        arr : [{...postDef, id : postId, title, todos}, ...userPosts]
+        arr: firebase.firestore.FieldValue.arrayUnion({ ...postDef, id: postId, title, todos })
     })
-    const res1 = await db.collection('comments').doc(postId).set({arr : []})
-    
+    const res1 = await db.collection('comments').doc(postId).set({ arr: [] })
+
 }
 
 

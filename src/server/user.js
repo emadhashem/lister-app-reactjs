@@ -17,6 +17,5 @@ export async function add_new_user(fName, lName, email, id) {
 export async function get_the_user_data(id) {
     
     const res = await db.collection('users').doc(id).get()
-    if(res.exists) return res.data()
-    return new Error("the user not exsit")
+    return res.data()
 }
