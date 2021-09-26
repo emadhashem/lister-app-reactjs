@@ -29,10 +29,16 @@
             p {
                 color: white;
             }
-            p.usrname__ {
+            span.usrname__ {
                 font-size: large;
                 text-transform: capitalize;
-                // font-weight: bold;
+                width: auto;
+                color: white;
+                
+                &:hover {
+                    text-decoration: underline;
+                    cursor: pointer;
+                }
             }
             p.time__ {
                 font-size: small;
