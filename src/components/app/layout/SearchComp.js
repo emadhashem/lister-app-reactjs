@@ -4,18 +4,29 @@ import List from '@material-ui/core/List';
 import ListItem from '@material-ui/core/ListItem';
 import SearchIcon from '@material-ui/icons/Search';
 import {uid} from 'uid'
-import CommonHeaderPost from '../../commonheaderpost/CommonHeaderPost';
+import { getUsersByNames } from '../../../server/user';
 
-const searchResults = ["omda", "emad", "test", "test2", "ali", "abdo"]
 
 function SearchComp() {
     const [searchText, setsearchText] = useState('')
+    const [searchRes, setsearchRes] = useState([])
+    async function handleSearchText(text) {
+        setsearchText(text)
+        if(text.length == 0) {
+            setsearchRes([])
+            return;
+        }
+        const res = await getUsersByNames(text, addResToState)
+    }
+    function addResToState(item) {
+        setsearchRes(arr => [...arr, item])
+    }
     return (
         <div className="search__root" >
-            {(searchResults.length < 0) && <div className = "search__results__container" >
+            {(searchRes.length > 0) && <div className = "search__results__container" >
                 {
-                    searchResults.map(item => (
-                        <CommonHeaderPost name = {item}  />
+                    searchRes.map(item => (
+                        <p key = {item.id} >{item.fName} {item.lName}</p>
                     ))
                 }
             </div>}
@@ -24,7 +35,7 @@ function SearchComp() {
                 <SearchIcon />
                 <input className="search__input" type="text"
                     value={searchText}
-                    onChange={(ev) => setsearchText(ev.target.value)} />
+                    onChange={(ev) => handleSearchText(ev.target.value)} />
             </div>
         </div>
 

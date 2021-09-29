@@ -4,7 +4,7 @@ const userDef = {
     lName : '',
     email : '',
     followersNum : 0,
-    followingNum : 0
+    followingNum : 0,
 }
 export async function add_new_user(fName, lName, email, id) {
     const res = await db.collection("users").doc(id).set({...userDef, fName, lName, email})
@@ -18,4 +18,14 @@ export async function get_the_user_data(id) {
     
     const res = await db.collection('users').doc(id).get()
     return res.data()
+}
+
+export async function getUsersByNames(userName = "", cb) {
+    let curName = userName.toLowerCase()
+    const res = await db.collection('users').get().then(querey => querey)
+    res.docs.forEach(item => {
+        if((item.data().fName + item.data().lName).includes(curName)) {
+            cb({id : item.id, ...(item.data())})
+        }
+    })
 }
