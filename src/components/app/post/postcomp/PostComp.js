@@ -34,7 +34,7 @@ function PostComp({ ...rest }) {
             <PostBodyComp title={rest.item.title}
                 todos={rest.item.todos}
             />
-            <PostFooterComp postId = {rest.item.id} />
+            <PostFooterComp postId = {rest.item.id} ownedUser = {rest.userId} />
         </div>
     )
 }

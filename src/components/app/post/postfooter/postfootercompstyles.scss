@@ -36,5 +36,16 @@
     width: 80%;
     height: auto;
     overflow-y: scroll;
+    margin-right: auto;
+    margin-left: auto;
+    .comment__container{
+        width: 100%;
+        margin-bottom: 15px;
+        
+        p {
+            width: 90%;
+            border-bottom: 1px solid black;
+        }
+    }
 }
 
