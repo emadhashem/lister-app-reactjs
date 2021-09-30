@@ -1,4 +1,5 @@
 import {db} from './firebase'
+import { downloadImg } from './storageFirebase'
 const userDef = {
     fName : '',
     lName : '',
@@ -23,9 +24,10 @@ export async function get_the_user_data(id) {
 export async function getUsersByNames(userName = "", cb) {
     let curName = userName.toLowerCase()
     const res = await db.collection('users').get().then(querey => querey)
-    res.docs.forEach(item => {
+    res.docs.forEach(async (item) => {
         if((item.data().fName + item.data().lName).includes(curName)) {
-            cb({id : item.id, ...(item.data())})
+            const userImg = await downloadImg(`imgs/${item.id}`)
+            cb({userImg , id : item.id, ...(item.data())})
         }
     })
 }

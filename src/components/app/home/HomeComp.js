@@ -8,12 +8,20 @@ function HomeComp({ user }) {
     const [posts, setposts] = useState([])
     useEffect(() => {
         (async () => {
+            setposts([])
             await getAllPostsFromFollowings(user.id, setThePosts)
         })()
     }, [])
 
     function setThePosts(arr, postUserData) {
-        setposts(curArr => [...curArr, ...(arr.map(item => ({...postUserData, item})))])
+        setposts(curArr => sortByTime([...curArr, ...(arr.map(item => ({...postUserData, item})))]))
+    }
+    function sortByTime(arr = []) {
+        return [...arr].sort((a, b) => {
+            let timeA = new Date(a.time)
+            let timeB = new Date(b.time)
+            return timeA - timeB
+        })
     }
     return (
         <div className="home__container" >
@@ -21,7 +29,7 @@ function HomeComp({ user }) {
 
             <div className="postscontainer__" >
                 {
-                    posts.map(item => <PostComp  {...item} />)
+                    posts.map(item => <PostComp key = {item.item.id}  {...item} />)
                 }
 
             </div>
