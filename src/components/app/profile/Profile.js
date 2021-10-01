@@ -17,6 +17,7 @@ import { deleteSomePhoto, downloadImg, noProfileFireBasePath, uploadImg } from '
 import { checkFollow, follow, unFollow } from '../../../server/follow';
 import { get_the_user_data } from '../../../server/user';
 import { useHistory } from 'react-router';
+import PostFooterComp from '../post/postfooter/PostFooterComp';
 
 
 const noProfilePath = 'noprofile.webp'
@@ -32,7 +33,7 @@ function ProfileComp({ idprofile, user }) {
     const [todosPost, settodosPost] = useState([])
     const [postsArr, setpostsArr] = useState([])
     const [loadingPosts, setloadingPosts] = useState(false)
-
+    const [newPostLoading, setnewPostLoading] = useState(false)
     const [userImg, setuserImg] = useState(noProfileFireBasePath)
     const [userName, setuserName] = useState('')
     const [followerNum, setfollowerNum] = useState(0)
@@ -45,7 +46,7 @@ function ProfileComp({ idprofile, user }) {
         setloadingPosts(true);
         (async () => {
             await getUserData()
-            setpostsArr(await getAllPosts(idprofile))
+            setpostsArr([...(await getAllPosts(idprofile))].reverse())
             setloadingPosts(false)
             await getProfileImg()
             if (isMine == false) {
@@ -109,11 +110,14 @@ function ProfileComp({ idprofile, user }) {
             return;
         }
         try {
+            setnewPostLoading(true)
             const postId = v4()
             const res = await addPostApi(user.id, postId, todosPost, titleInput)
             setpostsArr((arr) => [{ title: titleInput, todos: todosPost, id: postId }, ...arr])
             settitleInput('')
             settodosPost([])
+            setnewPostLoading(false)
+
         } catch (error) {
             alert(error.message)
         }
@@ -225,7 +229,7 @@ function ProfileComp({ idprofile, user }) {
                 {
                     (isMine) && (
                         <div className="addpost__container">
-                            <form>
+                            {(newPostLoading == false) ? <form>
                                 <input type="button" value="ADD POST" onClick={addPost} />
                                 <input className="title__input" type="text"
                                     placeholder="ADD TITLE OR DESCRIPTION"
@@ -251,16 +255,23 @@ function ProfileComp({ idprofile, user }) {
                                         ))
                                     }
                                 </div>
-                            </form>
+                            </form> : (
+                                <div className="loading__container" >
+                                    <CircularProgress color="success" />
+                                </div>
+                            )}
                         </div>
                     )
                 }
                 <div className="posts__container">
                     {
                         postsArr.map(item => (
-                            <PostBodyComp key={item.id}
-                                todos={item.todos}
-                                title={item.title} />
+                            <div>
+                                <PostBodyComp key={item.id}
+                                    todos={item.todos}
+                                    title={item.title} />
+                                <PostFooterComp postId={item.id} ownedUser={idprofile} />
+                            </div>
                         ))
 
                     }

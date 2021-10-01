@@ -14,6 +14,7 @@ import { connect } from 'react-redux';
 import DeleteOutlineIcon from '@mui/icons-material/DeleteOutline';
 Modal.setAppElement('#root')
 function PostFooterComp({ postId, ownedUser, user }) {
+    
     const [starclicked, setstarclicked] = useState(false)
     const [openModal, setopenModal] = useState(false)
     
@@ -23,7 +24,7 @@ function PostFooterComp({ postId, ownedUser, user }) {
     const [isMyPost, setisMyPost] = useState(false)
     
     async function handleComments() {
-
+        setisMyPost(ownedUser == user.id)
         setopenModal(true)
         setloadingComments(true)
         const resComments = await getAllCommenstByPostId(postId)
@@ -88,7 +89,7 @@ function PostFooterComp({ postId, ownedUser, user }) {
                                     {
                                         (isMyPost) && <IconButton
                                             onClick={() => removeComment_(item.id, item.text)} >
-                                            <DeleteOutlineIcon />
+                                            <DeleteOutlineIcon color = "error" />
                                         </IconButton>
                                     }
                                 </div>

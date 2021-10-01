@@ -16,19 +16,24 @@ function SearchComp() {
 
     const go = useHistory()
     async function handleSearchText(text) {
+        setsearchRes([])
         setsearchText(text)
         if (text.length == 0) {
-            setsearchRes([])
             return;
         }
+        
         const res = await getUsersByNames(text, addResToState)
     }
     function addResToState(item) {
-        console.log(item)
-        setsearchRes(arr => [...arr, item])
+       
+        setsearchRes(arr => {
+            if(arr.find(ele => ele == item)) return arr
+            return [...arr, item]
+        })
     }
     function handleResultClick(userId) {
         setsearchRes([])
+        setsearchText('')
         go.push('/member/profile/' + userId)
     }
     return (

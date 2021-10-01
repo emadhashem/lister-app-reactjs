@@ -12,6 +12,7 @@ export async function add_new_user(fName, lName, email, id) {
     const res1 = await db.collection("posts").doc(id).set({arr : []})
     const res2 = await db.collection("followers").doc(id).set({arr : []})
     const res3 = await db.collection("following").doc(id).set({arr : []})
+    await db.collection("links").doc(id).set({arr : []})
     return res
 }
 

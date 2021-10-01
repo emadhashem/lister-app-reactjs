@@ -41,7 +41,10 @@
     .comment__container{
         width: 100%;
         margin-bottom: 15px;
-        
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        justify-content: center;
         p {
             width: 90%;
             border-bottom: 1px solid black;
