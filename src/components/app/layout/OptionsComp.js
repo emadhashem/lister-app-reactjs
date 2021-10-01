@@ -14,9 +14,10 @@ function OptionsComp({ onLogOut, userId }) {
         <div className="options__conatiner" >
             <OptionComp onClick={() => { go.push('/member/profile/' + userId) }}
                 icon={() => <BookIcon fontSize="large" />} />
-            <OptionComp onClick={() => { }}
+            <OptionComp onClick={() => { go.push('/member/chat') }}
                 icon={() => <ChatBubbleIcon fontSize="large" />} />
             <OptionComp
+                
                 icon={() => <DashboardIcon fontSize="large" />} />
             <OptionComp onClick={onLogOut}
                 icon={() => <ExitToAppIcon fontSize="large" />} />

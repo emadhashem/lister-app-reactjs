@@ -1,9 +1,13 @@
-import React from 'react'
-
+import React, { useEffect } from 'react'
+import {socket as io} from '../../../server/socket'
 function ChatComp() {
+    useEffect(() => {
+        io.emit("message", "this new messge", 'obito is here ')
+    }, [])
     return (
         <div>
-            this ChatComp
+            <input type = "text"  />
+            <input type = "button" value = "send"  />
         </div>
     )
 }
