@@ -8,12 +8,15 @@ import { login_user } from '../../../server/auth';
 import { useHistory } from 'react-router-dom';
 import CircularProgress from '@material-ui/core/CircularProgress';
 import { get_the_user_data } from '../../../server/user';
+import { action_set_user_id, set_user_name } from '../../../redux/actions/userActions';
+import { useDispatch } from 'react-redux';
 
-function LoginComp({ getTheUserId }) {
+function LoginComp() {
     const [email, setemail] = useState("")
     const [pass, setpass] = useState("")
     const [loading, setloading] = useState(false)
     const go = useHistory()
+    
     async function handleSubmit(e) {
         setloading(true)
         e.preventDefault()
@@ -23,10 +26,15 @@ function LoginComp({ getTheUserId }) {
             return
         }
         const userData = await get_the_user_data(uid)
-        getTheUserId(uid)
+        setUserDataToRedux(uid, userData.fName + userData.lName)
         go.push("/member/home")
         setloading(false)
-        console.log(userData)
+        
+    }
+    const dispatch = useDispatch()
+    function setUserDataToRedux(id, name) {
+        dispatch(action_set_user_id(id))
+        dispatch(set_user_name(name))
     }
     async function login() {
         try {
