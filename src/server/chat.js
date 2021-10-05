@@ -35,3 +35,19 @@ export async function getAllMsgs(room) {
         return { error }
     }
 }
+
+export async function getAllChats(userId = "") {
+    try {
+        const res = await axios({
+            method: 'get',
+            url: 'http://localhost:4000/api/allchats/'+userId,
+            headers: {
+                'Content-Type': 'application/json'
+                // 'Content-Type': 'application/x-www-form-urlencoded',
+            },
+        })
+        return res
+    } catch (error) {
+        return { error }
+    }
+}

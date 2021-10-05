@@ -1,0 +1,16 @@
+.chats__container{
+    min-height: 80vh;
+    width: 80%;
+    margin: auto;
+    display: flex;
+    flex-direction: column;
+    .title__ {
+        text-align: center;
+        margin-bottom: 50px;
+    }
+    .chats__{
+        height: 1000px;
+        background-color: red;
+        width: 100%;
+    }
+}

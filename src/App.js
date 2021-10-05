@@ -12,6 +12,7 @@ import PrivateRoute from './components/restrictions/PrivateRoute';
 import HomeScreen from './screens/app/HomeScreen'
 import ProfileScreen from './screens/app/ProfileScreen';
 import ChatScreen from './screens/app/ChatScreen';
+import Chartroomscreen from './screens/app/chartroomscreen';
 function App() {
  
   return (
@@ -23,7 +24,8 @@ function App() {
 
           <PrivateRoute exact path = "/member/home" component = {HomeScreen} />
           <PrivateRoute path = "/member/profile/:idprofile" component = {ProfileScreen} />
-          <PrivateRoute path = "/member/chat" component = {ChatScreen} />
+          <PrivateRoute exact path = "/member/chat" component = {ChatScreen} />
+          <PrivateRoute path = "/member/chat/room/:iduser" component = {Chartroomscreen} />
 
           <Redirect to='/auth/login' />
         </Switch>
