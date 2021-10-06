@@ -1,6 +1,7 @@
 import React from 'react'
 import { getAllMsgs } from '../../../server/chat'
 import { socket as io } from '../../../server/socket'
+import { connect } from 'react-redux'
 function ChatRoomComp({ iduser }) {
     // useEffect(() => {
 
@@ -29,5 +30,5 @@ function ChatRoomComp({ iduser }) {
         </div>
     )
 }
-
-export default ChatRoomComp
+const mapStateToProps = ({ user }) => ({ user })
+export default connect(mapStateToProps)(ChatRoomComp)
