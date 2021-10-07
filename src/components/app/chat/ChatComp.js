@@ -7,7 +7,7 @@ import RecentChatCompUser from './RecentChatCompUser'
 
 const tstUser = 'rMvSJOCOxxf6s54lHD9vFZK0sll2'
 function ChatComp({ user }) {
-    const [chats, setchats] = useState(Array(20).fill(tstUser))
+    const [chats, setchats] = useState([])
     const [loadingChats, setloadingChats] = useState(false)
     useEffect(() => {
         (async () => {
@@ -21,7 +21,8 @@ function ChatComp({ user }) {
     async function getTheChats() {
         try {
             const res = await getAllChats(user.id)
-            // setchats(res.data.chaters)
+            setchats(res.data.chaters)
+            console.log(res.data)
         } catch (error) {
             alert('please wait there is kind of bug')
         }

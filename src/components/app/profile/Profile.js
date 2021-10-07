@@ -174,7 +174,15 @@ function ProfileComp({ idprofile, user }) {
     }
     /** profile  */
     /**--------------------------- */
-
+    function goToChat() {
+        go.push({
+            pathname : '/member/chat/room/'+idprofile,
+            state : {
+                username : userName,
+                userImg : userImg
+            }
+        })
+    }
     return (
         <div className="profilecontainer__" >
             <div className="top__container" >
@@ -219,7 +227,7 @@ function ProfileComp({ idprofile, user }) {
                                 fontSize="large" />}
                         </IconButton>
                         <IconButton >
-                            <ForumIcon fontSize="large" />
+                            <ForumIcon fontSize="large" onClick = {goToChat} />
                         </IconButton>
 
                     </div>
