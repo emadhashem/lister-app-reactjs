@@ -17,8 +17,8 @@ function OptionsComp({ onLogOut, userId }) {
             <OptionComp onClick={() => { go.push('/member/chat') }}
                 icon={() => <ChatBubbleIcon fontSize="large" />} />
             <OptionComp
-                
-                icon={() => <DashboardIcon fontSize="large" />} />
+                onClick={() => { go.push('/member/board') }}
+                icon={() => <DashboardIcon fontSize="large"/>} />
             <OptionComp onClick={onLogOut}
                 icon={() => <ExitToAppIcon fontSize="large" />} />
         </div>

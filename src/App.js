@@ -13,6 +13,7 @@ import HomeScreen from './screens/app/HomeScreen'
 import ProfileScreen from './screens/app/ProfileScreen';
 import ChatScreen from './screens/app/ChatScreen';
 import Chartroomscreen from './screens/app/chartroomscreen';
+import BoardScreen from './screens/app/BoardScreen';
 function App() {
  
   return (
@@ -26,6 +27,7 @@ function App() {
           <PrivateRoute path = "/member/profile/:idprofile" component = {ProfileScreen} />
           <PrivateRoute exact path = "/member/chat" component = {ChatScreen} />
           <PrivateRoute path = "/member/chat/room/:iduser" component = {Chartroomscreen} />
+          <PrivateRoute path = "/member/board" component = {BoardScreen} />
 
           <Redirect to='/auth/login' />
         </Switch>
